@@ -5,13 +5,13 @@ function App() {
     {
       id : 1,
       name : 'HP',
-      price : '124'
+      price : '20,000'
     },
     {
       id : 2,
       name : 'Dell',
-      price : '1264'
-    },
+      price : '25,000'
+    }
   ]
   const [lists, setList] = useState(list)
   const [updateState, setUpdateState] = useState(-1)
@@ -19,7 +19,7 @@ function App() {
     <div className='crud'>
       <div>
         <AddList setList = {setList} />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
           <table>
             {
               lists.map((current)=>(
@@ -43,10 +43,12 @@ function App() {
     function handleEdit(id){
       setUpdateState(id)
     }
+
     function handleDelete(id){
       const newlist = lists.filter((li)=> li.id !== id)
       setList(newlist)
     }
+
     function handleSubmit(e){
       e.preventDefault()
       const name= e.target.elements.name.value;
@@ -54,12 +56,12 @@ function App() {
       const newlist = lists.map((li) => (
         li.id === updateState ? {...li, name:name, price : price} : li
       ))
-
+      
       setList(newlist)
       setUpdateState(-1)
     }
 }
-  
+     
     function EditList({current , lists, setList}){
         function handleInputname(e){
           const value = e.target.value;
@@ -103,7 +105,6 @@ function App() {
         setList((prevList)=>{
           return prevList.concat(newlist)
         })
-
       }
       return(
         <form className='addForm' onSubmit={handleSubmit} >
